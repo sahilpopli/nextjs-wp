@@ -15,7 +15,7 @@ export default function Index({ allPosts: { edges }, preview }) {
   return (
     <Layout preview={preview}>
       <Head>
-        <title>Brah.ma Blog Example with {CMS_NAME}</title>
+        <title>Brah.ma Blog with {CMS_NAME}</title>
       </Head>
       <Container>
         <Intro />
