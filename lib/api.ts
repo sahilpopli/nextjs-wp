@@ -31,7 +31,7 @@ export async function getPreviewPost(id, idType = 'DATABASE_ID') {
   const data = await fetchAPI(
     `
     query PreviewPost($id: ID!, $idType: PostIdType!) {
-      post(id: $id, idType: $idType) {
+      graphLekh(id: $id, idType: $idType) {
         databaseId
         slug
         status
@@ -47,7 +47,7 @@ export async function getPreviewPost(id, idType = 'DATABASE_ID') {
 export async function getAllPostsWithSlug() {
   const data = await fetchAPI(`
     {
-      posts(first: 10000) {
+      graphLekh(first: 10000) {
         edges {
           node {
             slug
@@ -63,7 +63,7 @@ export async function getAllPostsForHome(preview) {
   const data = await fetchAPI(
     `
     query AllPosts {
-      posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
+      graphLekh(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
         edges {
           node {
             title
@@ -120,7 +120,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         url
       }
     }
-    fragment PostFields on Post {
+    fragment PostFields on graphLekh {
       title
       excerpt
       slug
@@ -142,16 +142,10 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
           }
         }
       }
-      tags {
-        edges {
-          node {
-            name
-          }
-        }
-      }
+      
     }
     query PostBySlug($id: ID!, $idType: PostIdType!) {
-      post(id: $id, idType: $idType) {
+      graphLekh(id: $id, idType: $idType) {
         ...PostFields
         content
         ${
